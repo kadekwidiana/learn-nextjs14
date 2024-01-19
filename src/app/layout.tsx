@@ -2,13 +2,16 @@
 
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import Navbar from './navbar'
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { SessionProvider } from 'next-auth/react'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Poppins({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400']
+})
 
 // export const metadata: Metadata = {
 //   title: 'Create Next App',

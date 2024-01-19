@@ -3,7 +3,7 @@ import { NextMiddleware } from "next/dist/server/web/types";
 import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
 
 const onlyAdminPage = ['/dashboard'];
-
+const authPage = ['/login', '/register'];
 
 export default function withAuth(middleware: NextMiddleware, requireAuth: string[] = [],) {
     return async (req: NextRequest, next: NextFetchEvent) => {
@@ -14,15 +14,22 @@ export default function withAuth(middleware: NextMiddleware, requireAuth: string
                 req,
                 secret: process.env.NEXTAUTH_SECRET,
             });
-            if (!token) {
+            if (!token && !authPage.includes(pathname)) {
                 const url = new URL('/login', req.url);
                 url.searchParams.set('callbackUrl', encodeURI(req.url));
                 return NextResponse.redirect(url)
             }
-            // handle akses halaman
-            if (token.role !== 'admin' && onlyAdminPage.includes(pathname)) {
-                return NextResponse.redirect(new URL('/', req.url));
+            // ketika sudah login, tapi user berada di halam auth
+            if (token) {
+                if (authPage.includes(pathname)) {
+                    return NextResponse.redirect(new URL('/', req.url))
+                }
+                // handle akses halaman
+                if (token.role !== 'admin' && onlyAdminPage.includes(pathname)) {
+                    return NextResponse.redirect(new URL('/', req.url));
+                }
             }
+
         }
         return middleware(req, next);
     }
