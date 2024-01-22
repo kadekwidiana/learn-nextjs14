@@ -2,32 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+
+.font-family-karla {
+    font-family: karla;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.bg-sidebar {
+    background: #3d68ff;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.cta-btn {
+    color: #3d68ff;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.upgrade-btn {
+    background: #fe793643;
+}
+
+.upgrade-btn:hover {
+    background: #fe793643;
+}
+
+.active-nav-link {
+    background: #fe793643;
+}
+
+.nav-item:hover {
+    background: #fe793643;
+}
+
+.account-link:hover {
+    background: #fe793643;
+}
+
+.sidebar-transition {
+    transition: transform 0.3s ease-in-out;
+}
+
+/* ... (your existing styles) ... */
+.content-transition {
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.content-open {
+    margin-left: 0px;
+    /* Sesuaikan sesuai lebar sisi bar */
+}
+
+.sidebar-size {
+    width: 300px;
+    /* Sesuaikan sesuai lebar sisi bar */
+}
+
+.content-closed {
+    margin-left: -300px;
 }
